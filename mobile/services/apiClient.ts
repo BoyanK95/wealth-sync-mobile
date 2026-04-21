@@ -32,7 +32,7 @@ export async function apiFetch(url: string, options: any = {}) {
     ...options,
     headers: {
       ...(options.headers || {}),
-      Authorization: `Bearer ${token}`,
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
   });
 
@@ -43,7 +43,7 @@ export async function apiFetch(url: string, options: any = {}) {
       ...options,
       headers: {
         ...(options.headers || {}),
-        Authorization: `Bearer ${token}`,
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     });
   }
