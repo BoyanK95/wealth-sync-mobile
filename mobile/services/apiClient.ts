@@ -6,6 +6,8 @@ const API_URL = process.env.EXPO_PUBLIC_API_URL!;
 async function refreshToken() {
   const refreshToken = await authService.getRefreshToken();
 
+  if (!refreshToken) throw new Error("No refresh token available");
+
   const res = await fetch(`${API_URL}/api/auth/refresh`, {
     method: "POST",
     headers: {
