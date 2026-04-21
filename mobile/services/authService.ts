@@ -22,6 +22,10 @@ export const authService = {
 
     const data = await res.json();
 
+    if (!data.accessToken || !data.refreshToken) {
+      throw new Error("Invalid login response");
+    }
+
     await SecureStore.setItemAsync("accessToken", data.accessToken);
     await SecureStore.setItemAsync("refreshToken", data.refreshToken);
 
