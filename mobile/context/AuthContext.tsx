@@ -1,8 +1,14 @@
-
 import { createContext, useEffect, useState } from "react";
 import { authService } from "../services/authService";
 
-export const AuthContext = createContext(null);
+interface AuthContextType {
+  user: any;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  loading: boolean;
+}
+
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
