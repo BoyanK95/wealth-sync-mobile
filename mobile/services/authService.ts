@@ -2,6 +2,12 @@ import * as SecureStore from "expo-secure-store";
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL!;
 
+if (!API_URL) {
+  throw new Error(
+    "Missing EXPO_PUBLIC_API_URL in your environment variables.",
+  );
+}
+
 export const authService = {
   async login(email: string, password: string) {
     const res = await fetch(`${API_URL}/api/auth/mobile-login`, {
