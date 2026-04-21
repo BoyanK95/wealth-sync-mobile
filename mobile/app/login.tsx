@@ -9,13 +9,22 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleLogin = async () => {
+    if (submitting) return;
+    if (!email.trim() || !password.trim()) {
+      alert("Please fill in all fields");
+      return;
+    }
+    setSubmitting(true);
     try {
       await login(email, password);
       router.replace("/"); // goes to (tabs)
     } catch {
       alert("Login failed");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -27,7 +36,11 @@ export default function Login() {
         secureTextEntry
         onChangeText={setPassword}
       />
-      <Button title="Login" onPress={handleLogin} />
+      <Button
+        title={submitting ? "Logging in..." : "Login"}
+        disabled={submitting}
+        onPress={handleLogin}
+      />
     </View>
   );
 }
