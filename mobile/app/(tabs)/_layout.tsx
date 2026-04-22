@@ -21,9 +21,9 @@ export default function TabLayout() {
     );
   }
 
-  if (!user) {
-    return <Redirect href="/login" />;
-  }
+  // if (!user) {
+  //   return <Redirect href="/login" />;
+  // }
   console.log(user);
 
   return (
