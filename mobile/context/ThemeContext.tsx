@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useColorScheme as RNUseColorScheme } from 'react-native';
+import { useColorScheme as RNUseColorScheme, Appearance } from 'react-native';
 
 type Theme = 'light' | 'dark' | 'auto';
 
@@ -19,6 +19,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('auto');
 
   const colorScheme = theme === 'auto' ? systemColorScheme : theme;
+
+  useEffect(() => {
+    if (colorScheme) {
+      Appearance.setColorScheme(colorScheme);
+    }
+  }, [colorScheme]);
 
   useEffect(() => {
     const loadTheme = async () => {
