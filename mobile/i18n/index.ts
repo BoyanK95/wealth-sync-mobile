@@ -6,31 +6,40 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import en from "./locales/en.json";
 import bg from "./locales/bg.json";
 
-const resources = {
-  en: { translation: en },
-  bg: { translation: bg },
-};
-
 const LANGUAGE_KEY = "app_language";
 
-const initI18n = async () => {
+const resources = {
+  en: {
+    translation: en,
+  },
+  bg: {
+    translation: bg,
+  },
+};
+const getInitialLanguage = async () => {
   const savedLang = await AsyncStorage.getItem(LANGUAGE_KEY);
-  const deviceLang = Localization.getLocales()[0]?.languageCode;
-  const supportedLang = ["en", "bg"].includes(deviceLang as string)
-    ? deviceLang
-    : "en";
+  const deviceLang = Localization.getLocales()?.[0]?.languageCode ?? "en";
+  const supportedLang = ["en", "bg"].includes(deviceLang) ? deviceLang : "en";
+
+  return savedLang || supportedLang;
+};
+
+const initI18n = async () => {
+  const lng = await getInitialLanguage();
+
   await i18n.use(initReactI18next).init({
-    lng: (savedLang ?? supportedLang) as string,
+    lng,
     fallbackLng: "en",
     resources,
     interpolation: {
       escapeValue: false,
     },
+    compatibilityJSON: "v4",
   });
 };
 
-export const i18nReady = initI18n().catch((error) => {
-  console.error("Failed to initialize i18n", error);
+initI18n().catch((err) => {
+  console.error("Failed to initialize i18n", err);
 });
 
 export const changeLanguage = async (lng: string) => {
