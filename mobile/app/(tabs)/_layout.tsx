@@ -6,10 +6,14 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 import { ThemedView } from "@/components/themed-view";
 import { ThemedText } from "@/components/themed-text";
 import { useAuth } from "@/hooks/use-auth";
+import { TouchableOpacity } from "react-native";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useTheme } from "@/context/ThemeContext";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { user, loading } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   if (loading) {
     return (
@@ -29,7 +33,16 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tabIconDefault,
-        headerShown: false,
+        headerShown: true,
+        headerRight: () => (
+          <TouchableOpacity onPress={toggleTheme} style={{ marginRight: 16 }}>
+            <MaterialIcons
+              name={colorScheme === 'dark' ? 'wb-sunny' : 'brightness-2'}
+              size={24}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </TouchableOpacity>
+        ),
         tabBarButton: HapticTab,
         tabBarStyle: {
           backgroundColor: Colors[colorScheme ?? "light"].background,

@@ -10,13 +10,10 @@ import "@/i18n";
 import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { AuthProvider } from "@/context/AuthContext";
+import { ThemeProvider as CustomThemeProvider } from "@/context/ThemeContext";
 import "@/global.css";
 
-export const unstable_settings = {
-  anchor: "(tabs)",
-};
-
-export default function RootLayout() {
+function App() {
   const colorScheme = useColorScheme();
 
   return (
@@ -32,5 +29,13 @@ export default function RootLayout() {
         <StatusBar style="auto" />
       </AuthProvider>
     </ThemeProvider>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <CustomThemeProvider>
+      <App />
+    </CustomThemeProvider>
   );
 }
