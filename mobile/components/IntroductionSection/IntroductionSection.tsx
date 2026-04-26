@@ -16,8 +16,8 @@ export default function IntroductionSection() {
       {/* Welcome */}
       {user && (
         <Text className="mb-4 text-base">
-          {t("IntroductionSection.welcomeBack")}{" "}
-          <Text className="font-bold text-green-700">{user.email}</Text>
+          {t("IntroductionSection.welcomeBack")} [user.email ?
+          <Text className="font-bold text-green-700">{user.email}</Text> : null]
         </Text>
       )}
       {/* Image */}
