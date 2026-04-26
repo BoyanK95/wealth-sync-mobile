@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { View, TextInput, Button } from "react-native";
-import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function Login() {
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
   const router = useRouter();
 
   const [email, setEmail] = useState("");

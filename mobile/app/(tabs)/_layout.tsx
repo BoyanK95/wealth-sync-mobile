@@ -8,10 +8,11 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 import { AuthContext } from "@/context/AuthContext";
 import { ThemedView } from "@/components/themed-view";
 import { ThemedText } from "@/components/themed-text";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useAuth();
 
   if (loading) {
     return (
@@ -44,11 +45,20 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="subscriptions"
         options={{
-          title: "Explore",
+          title: "subscriptions",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="paperplane.fill" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="gear" color={color} />
           ),
         }}
       />
