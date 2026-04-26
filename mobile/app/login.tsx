@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { View, TextInput, Button } from "react-native";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
 
 export default function Login() {

@@ -1,39 +1,57 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { authService } from "../services/authService";
 
+type User = {
+  name?: string | null;
+  token: string;
+  email?: string;
+};
+
 interface AuthContextType {
-  user: any;
+  user: User | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   loading: boolean;
 }
 
-export const AuthContext = createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined,
+);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       const token = await authService.getAccessToken();
+
       if (token) {
         setUser({ token });
       }
+
       setLoading(false);
     })();
   }, []);
 
   const login = async (email: string, password: string) => {
-    const user = await authService.login(email, password);
-    setUser(user);
+    const data = await authService.login(email, password);
+
+    setUser({
+      token: data.token,
+      email: data.email,
+    });
   };
 
   const logout = async () => {
     try {
       await authService.logout();
-    } catch (error) {
-      console.log(error);
     } finally {
       setUser(null);
     }
