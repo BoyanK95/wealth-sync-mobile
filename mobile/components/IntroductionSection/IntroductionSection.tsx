@@ -9,8 +9,6 @@ export default function IntroductionSection() {
   const { t } = useTranslation();
   const router = useRouter();
   const { user } = useAuth();
-
-  console.log(t("IntroductionSection.title"));
   
 
   return (
