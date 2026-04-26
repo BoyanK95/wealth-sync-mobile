@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { authService } from "../services/authService";
 
 interface AuthContextType {
@@ -10,7 +10,7 @@ interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
