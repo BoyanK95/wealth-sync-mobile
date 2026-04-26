@@ -11,7 +11,6 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { AuthProvider } from "@/context/AuthContext";
 import "@/global.css";
-import i18n from "@/i18n";
 
 export const unstable_settings = {
   anchor: "(tabs)",
