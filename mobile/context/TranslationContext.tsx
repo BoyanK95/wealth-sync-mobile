@@ -1,6 +1,5 @@
 import { useEffect, useState, ReactNode } from "react";
 import { View, ActivityIndicator } from "react-native";
-import "@/i18n";
 import { i18nReady } from "@/i18n";
 
 export default function AppWrapper({ children }: { children: ReactNode }) {
