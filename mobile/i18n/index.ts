@@ -19,26 +19,23 @@ const initI18n = async () => {
   const supportedLang = ["en", "bg"].includes(deviceLang as string)
     ? deviceLang
     : "en";
-
-  try {
-    await i18n.use(initReactI18next).init({
-      lng: (savedLang ?? supportedLang) as string,
-      fallbackLng: "en",
-      resources,
-      interpolation: {
-        escapeValue: false,
-      },
-    });
-  } catch (error) {
-    throw new Error(`Failed to initialize i18n: ${error}`);
-  }
+  await i18n.use(initReactI18next).init({
+    lng: (savedLang ?? supportedLang) as string,
+    fallbackLng: "en",
+    resources,
+    interpolation: {
+      escapeValue: false,
+    },
+  });
 };
 
-initI18n();
+export const i18nReady = initI18n().catch((error) => {
+  console.error("Failed to initialize i18n", error);
+});
 
 export const changeLanguage = async (lng: string) => {
   await AsyncStorage.setItem(LANGUAGE_KEY, lng);
-  i18n.changeLanguage(lng);
+  await i18n.changeLanguage(lng);
 };
 
 export default i18n;
