@@ -19,6 +19,14 @@ export default function IntroductionSection() {
           <Text className="font-bold text-green-700">{user.email}</Text>
         </Text>
       )}
+      {/* Image */}
+      <View className="items-center justify-center">
+        <Image
+          source={require("@/assets/images/calculatior.png")}
+          className="h-[250px] w-full"
+          resizeMode="contain"
+        />
+      </View>
 
       <View className="flex flex-col gap-6">
         {/* Text Content */}
@@ -55,15 +63,6 @@ export default function IntroductionSection() {
               <Text className="text-xs">{t("features.mobile")}</Text>
             </View>
           </View>
-        </View>
-
-        {/* Image */}
-        <View className="items-center justify-center">
-          <Image
-            source={require("@/assets/images/calculatior.png")}
-            className="h-[250px] w-full"
-            resizeMode="contain"
-          />
         </View>
       </View>
     </View>

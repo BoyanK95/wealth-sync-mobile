@@ -6,8 +6,8 @@ import {
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import "@/i18n";
 import "react-native-reanimated";
-
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { AuthProvider } from "@/context/AuthContext";
 import TranslationProvider from "@/context/TranslationContext";
