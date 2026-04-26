@@ -28,8 +28,36 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tabIconDefault,
         headerShown: false,
         tabBarButton: HapticTab,
+        tabBarStyle: {
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+          borderTopWidth: 0,
+          borderRadius: 24,
+          marginHorizontal: 12,
+          marginBottom: 20,
+          paddingBottom: 16,
+          paddingTop: 12,
+          height: 80,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.15,
+          shadowRadius: 12,
+          elevation: 10,
+          borderCurve: "continuous",
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "600",
+          marginBottom: 4,
+        },
+        tabBarIconStyle: {
+          marginBottom: 4,
+        },
+        // contentStyle: {
+        //   paddingBottom: 100,
+        // },
       }}
     >
       <Tabs.Screen

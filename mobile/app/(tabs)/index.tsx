@@ -1,12 +1,10 @@
-import { View, Text } from "react-native";
-import React from "react";
+import IntroductionSection from "@/components/IntroductionSection/IntroductionSection";
+import { View } from "react-native";
 
-const index = () => {
+export default function App() {
   return (
-    <View>
-      <Text>index</Text>
+    <View className="flex-1 items-center justify-center bg-white">
+      <IntroductionSection />
     </View>
   );
-};
-
-export default index;
+}
