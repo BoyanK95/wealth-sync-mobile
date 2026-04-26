@@ -7,13 +7,13 @@ import { ThemedView } from "@/components/themed-view";
 import { ThemedText } from "@/components/themed-text";
 import { useAuth } from "@/hooks/use-auth";
 import { TouchableOpacity } from "react-native";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { user, loading } = useAuth();
-  const { theme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
 
   if (loading) {
     return (
@@ -37,7 +37,7 @@ export default function TabLayout() {
         headerRight: () => (
           <TouchableOpacity onPress={toggleTheme} style={{ marginRight: 16 }}>
             <MaterialIcons
-              name={colorScheme === 'dark' ? 'wb-sunny' : 'brightness-2'}
+              name={colorScheme === "dark" ? "wb-sunny" : "brightness-2"}
               size={24}
               color={Colors[colorScheme ?? "light"].text}
             />
