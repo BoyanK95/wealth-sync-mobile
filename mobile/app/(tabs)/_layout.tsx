@@ -34,6 +34,9 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tabIconDefault,
         headerShown: true,
+        headerStyle: {
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+        },
         headerRight: () => (
           <TouchableOpacity onPress={toggleTheme} style={{ marginRight: 16 }}>
             <MaterialIcons
