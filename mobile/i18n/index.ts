@@ -15,17 +15,23 @@ const LANGUAGE_KEY = "app_language";
 
 const initI18n = async () => {
   const savedLang = await AsyncStorage.getItem(LANGUAGE_KEY);
-  const deviceLang = Localization.locale.split("-")[0];
+  const deviceLang = Localization.getLocales()[0]?.languageCode;
+  const supportedLang = ["en", "bg"].includes(deviceLang as string)
+    ? deviceLang
+    : "en";
 
-  await i18n.use(initReactI18next).init({
-    compatibilityJSON: "v3",
-    lng: savedLang || deviceLang || "en",
-    fallbackLng: "en",
-    resources,
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+  try {
+    await i18n.use(initReactI18next).init({
+      lng: (savedLang ?? supportedLang) as string,
+      fallbackLng: "en",
+      resources,
+      interpolation: {
+        escapeValue: false,
+      },
+    });
+  } catch (error) {
+    throw new Error(`Failed to initialize i18n: ${error}`);
+  }
 };
 
 initI18n();
