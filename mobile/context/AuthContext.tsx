@@ -42,9 +42,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     const data = await authService.login(email, password);
+    const token = await authService.getAccessToken();
+
+    if (!token) {
+      throw new Error("Missing access token after login");
+    }
 
     setUser({
-      token: data.token,
+      token,
       email: data.email,
     });
   };
