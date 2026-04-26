@@ -4,12 +4,12 @@ import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, Shield, Zap, Smartphone } from "lucide-react-native";
 import { useAuth } from "@/hooks/use-auth";
+import { Routes } from "@/constants/routes";
 
 export default function IntroductionSection() {
   const { t } = useTranslation();
   const router = useRouter();
   const { user } = useAuth();
-  
 
   return (
     <View className="w-full px-4 py-10">
@@ -42,7 +42,7 @@ export default function IntroductionSection() {
 
           {/* CTA */}
           <Pressable
-            onPress={() => router.push(user ? "/dashboard" : "/login")}
+            onPress={() => router.push(user ? Routes.DASHBOARD : Routes.LOGIN)}
             className="mt-2 flex-row items-center justify-center rounded-lg bg-green-700 px-5 py-3"
           >
             <Text className="text-white text-base font-semibold">
