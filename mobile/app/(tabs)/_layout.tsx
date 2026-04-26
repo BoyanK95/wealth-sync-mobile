@@ -1,17 +1,15 @@
 import { Redirect, Tabs, useRouter } from "expo-router";
-import React, { useContext } from "react";
-
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { AuthContext } from "@/context/AuthContext";
 import { ThemedView } from "@/components/themed-view";
 import { ThemedText } from "@/components/themed-text";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useAuth();
 
   if (loading) {
     return (
@@ -30,8 +28,36 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tabIconDefault,
         headerShown: false,
         tabBarButton: HapticTab,
+        tabBarStyle: {
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+          borderTopWidth: 0,
+          borderRadius: 24,
+          marginHorizontal: 12,
+          marginBottom: 20,
+          paddingBottom: 16,
+          paddingTop: 12,
+          height: 80,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.15,
+          shadowRadius: 12,
+          elevation: 10,
+          borderCurve: "continuous",
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "600",
+          marginBottom: 4,
+        },
+        tabBarIconStyle: {
+          marginBottom: 4,
+        },
+        // contentStyle: {
+        //   paddingBottom: 100,
+        // },
       }}
     >
       <Tabs.Screen
@@ -44,11 +70,29 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="subscriptions"
         options={{
-          title: "Explore",
+          title: "subscriptions",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="paperplane.fill" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="gear" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="connections"
+        options={{
+          title: "Connections",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="link" color={color} />
           ),
         }}
       />
