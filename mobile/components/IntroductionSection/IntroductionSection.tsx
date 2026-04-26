@@ -9,7 +9,7 @@ import { Routes } from "@/constants/routes";
 export default function IntroductionSection() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   return (
     <View className="w-full px-4 py-10">
@@ -42,8 +42,12 @@ export default function IntroductionSection() {
 
           {/* CTA */}
           <Pressable
-            onPress={() => router.push(user ? Routes.DASHBOARD : Routes.LOGIN)}
+            onPress={() => {
+              if (loading) return;
+              router.push(user ? Routes.DASHBOARD : Routes.LOGIN);
+            }}
             className="mt-2 flex-row items-center justify-center rounded-lg bg-green-700 px-5 py-3"
+            disabled={loading}
           >
             <Text className="text-white text-base font-semibold">
               {user
