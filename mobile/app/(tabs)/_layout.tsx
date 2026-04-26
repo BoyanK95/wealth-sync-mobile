@@ -1,11 +1,8 @@
 import { Redirect, Tabs, useRouter } from "expo-router";
-import React, { useContext } from "react";
-
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { AuthContext } from "@/context/AuthContext";
 import { ThemedView } from "@/components/themed-view";
 import { ThemedText } from "@/components/themed-text";
 import { useAuth } from "@/hooks/use-auth";
@@ -59,6 +56,15 @@ export default function TabLayout() {
           title: "Settings",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="gear" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="connections"
+        options={{
+          title: "Connections",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="link" color={color} />
           ),
         }}
       />
