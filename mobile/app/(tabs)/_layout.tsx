@@ -22,7 +22,7 @@ export default function TabLayout() {
     }
   }, [loading, user, router]);
 
-  if (loading || !user) {
+  if (loading) {
     return (
       <ThemedView>
         <ThemedText>Loading...</ThemedText>
