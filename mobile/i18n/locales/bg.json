@@ -18,7 +18,8 @@
     "passwordPlaceholder": "Парола",
     "loginButton": "Влез",
     "loggingIn": "Влизане...",
-    "register": "Регистрация"
+    "noAccount": "Нямаш акаунт? ",
+    "registerButton": "Регистрация"
   },
   "RegisterScreen": {
     "emailPlaceholder": "Имейл",

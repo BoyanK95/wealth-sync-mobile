@@ -18,7 +18,8 @@
     "passwordPlaceholder": "Password",
     "loginButton": "Log In",
     "loggingIn": "Logging in...",
-    "register": "Register"
+    "noAccount": "Don’t have an account? ",
+    "registerButton": "Register"
   },
   "RegisterScreen": {
     "emailPlaceholder": "Email",

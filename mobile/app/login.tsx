@@ -3,6 +3,7 @@ import { View, TextInput, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "react-i18next";
+import { Routes } from "@/constants/routes";
 
 export default function Login() {
   const { t } = useTranslation();
@@ -78,7 +79,7 @@ export default function Login() {
             {t("LoginScreen.noAccount")}
           </Text>
           <Pressable
-            onPress={() => router.replace({ pathname: "/register" } as any)}
+            onPress={() => router.replace({ pathname: Routes.REGISTER } as any)}
           >
             <Text className="text-sm font-semibold text-slate-900 dark:text-white">
               {t("LoginScreen.registerButton")}
