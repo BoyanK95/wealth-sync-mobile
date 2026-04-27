@@ -10,5 +10,22 @@
       "realtime": "Обновяване в реално време",
       "mobile": "Мобилно приложение"
     }
+  },
+  "LoginScreen": {
+    "title": "Добре дошъл обратно",
+    "loginCTA": "Влез в своя акаунт",
+    "emailPlaceholder": "Имейл",
+    "passwordPlaceholder": "Парола",
+    "loginButton": "Влез",
+    "loggingIn": "Влизане...",
+    "register": "Регистрация"
+  },
+  "RegisterScreen": {
+    "emailPlaceholder": "Имейл",
+    "passwordPlaceholder": "Парола",
+    "confirmPasswordPlaceholder": "Потвърдете паролата",
+    "registerButton": "Създай акаунт",
+    "haveAccount": "Вече имате акаунт? ",
+    "logIn": "Влез"
   }
 }

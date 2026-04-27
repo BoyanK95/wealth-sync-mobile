@@ -10,5 +10,22 @@
       "realtime": "Real-time Updates",
       "mobile": "Mobile App"
     }
+  },
+  "LoginScreen": {
+    "title": "Welcome back",
+    "loginCTA": "Log In to Your Account",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Log In",
+    "loggingIn": "Logging in...",
+    "register": "Register"
+  },
+  "RegisterScreen": {
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "registerButton": "Create Account",
+    "haveAccount": "Already have an account? ",
+    "logIn": "Log In"
   }
 }
