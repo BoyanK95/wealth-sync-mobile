@@ -17,7 +17,7 @@ export default function Login() {
   const handleLogin = async () => {
     if (submitting) return;
     if (!email.trim() || !password.trim()) {
-      alert("Please fill in all fields");
+      alert(t("LoginScreen.fillAllFields"));
       return;
     }
     setSubmitting(true);
@@ -25,7 +25,7 @@ export default function Login() {
       await login(email, password);
       router.replace({ pathname: "/" } as any);
     } catch {
-      alert("Login failed");
+      alert(t("LoginScreen.loginFailed"));
     } finally {
       setSubmitting(false);
     }

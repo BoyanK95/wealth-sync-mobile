@@ -19,7 +19,9 @@
     "loginButton": "Влез",
     "loggingIn": "Влизане...",
     "noAccount": "Нямаш акаунт? ",
-    "registerButton": "Регистрация"
+    "registerButton": "Регистрация",
+    "fillAllFields": "Моля, попълнете всички полета!",
+    "loginFailed": "Влизането не беше успешно. Моля, опитайте отново!"
   },
   "RegisterScreen": {
     "title": "Създай профил",
@@ -32,7 +34,7 @@
     "haveAccount": "Вече имате акаунт? ",
     "registering": "Създаване на акаунт...",
     "logIn": "Влез",
-    "unfiledFieldError": "Моля, попълнете всички полета.",
+    "fillAllFields": "Моля, попълнете всички полета.",
     "registrationFailed": "Регистрацията не беше успешна. Моля, опитайте отново."
   }
 }
