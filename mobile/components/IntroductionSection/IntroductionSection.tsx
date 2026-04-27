@@ -12,12 +12,12 @@ export default function IntroductionSection() {
   const { user, loading } = useAuth();
 
   return (
-    <View className="w-full px-4 py-10">
+    <View className="w-full px-4 py-10 bg-white dark:bg-gray-900">
       {/* Welcome */}
       {user && (
-        <Text className="mb-4 text-base">
+        <Text className="mb-4 text-base text-black dark:text-white">
           {t("IntroductionSection.welcomeBack")} [user.email ?
-          <Text className="font-bold text-green-700">{user.email}</Text> : null]
+          <Text className="font-bold text-green-700 dark:text-green-400">{user.email}</Text> : null]
         </Text>
       )}
       {/* Image */}
@@ -32,11 +32,11 @@ export default function IntroductionSection() {
       <View className="flex flex-col gap-6">
         {/* Text Content */}
         <View className="gap-4">
-          <Text className="text-3xl font-bold">
+          <Text className="text-3xl font-bold text-black dark:text-white">
             {t("IntroductionSection.title")}
           </Text>
 
-          <Text className="text-base text-gray-500">
+          <Text className="text-base text-gray-500 dark:text-gray-400">
             {t("IntroductionSection.description")}
           </Text>
 
@@ -46,7 +46,7 @@ export default function IntroductionSection() {
               if (loading) return;
               router.push(user ? Routes.DASHBOARD : Routes.LOGIN);
             }}
-            className="mt-2 flex-row items-center justify-center rounded-lg bg-green-700 px-5 py-3"
+            className="mt-2 flex-row items-center justify-center rounded-lg bg-green-700 dark:bg-green-600 px-5 py-3"
             disabled={loading}
           >
             <Text className="text-white text-base font-semibold">
@@ -61,21 +61,21 @@ export default function IntroductionSection() {
           <View className="mt-4 flex-row justify-between">
             <View className="flex-row items-center gap-1">
               <Shield size={16} color="#15803d" />
-              <Text className="text-xs">
+              <Text className="text-xs text-black dark:text-white">
                 {t("IntroductionSection.features.secure")}
               </Text>
             </View>
 
             <View className="flex-row items-center gap-1">
               <Zap size={16} color="#15803d" />
-              <Text className="text-xs">
+              <Text className="text-xs text-black dark:text-white">
                 {t("IntroductionSection.features.realtime")}
               </Text>
             </View>
 
             <View className="flex-row items-center gap-1">
               <Smartphone size={16} color="#15803d" />
-              <Text className="text-xs">
+              <Text className="text-xs text-black dark:text-white">
                 {t("IntroductionSection.features.mobile")}
               </Text>
             </View>
