@@ -3,6 +3,7 @@ import { View, TextInput, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "react-i18next";
+import { Routes } from "@/constants/routes";
 
 export default function Register() {
   const { t } = useTranslation();
@@ -17,16 +18,20 @@ export default function Register() {
   const handleRegister = async () => {
     if (submitting) return;
     if (!name.trim() || !email.trim() || !password.trim()) {
-      alert("Please fill in all fields");
+      alert(t("RegisterScreen.fillAllFields"));
       return;
     }
 
     setSubmitting(true);
     try {
       await register(name.trim(), email.trim(), password);
-      router.replace({ pathname: "/" } as any);
-    } catch {
-      alert("Registration failed. Please try again.");
+      router.replace({ pathname: Routes.HOME } as any);
+    } catch (error) {
+      alert(
+        error instanceof Error
+          ? error.message
+          : t("RegisterScreen.registrationFailed"),
+      );
     } finally {
       setSubmitting(false);
     }
@@ -88,7 +93,7 @@ export default function Register() {
             {t("RegisterScreen.haveAccount")}
           </Text>
           <Pressable
-            onPress={() => router.replace({ pathname: "/login" } as any)}
+            onPress={() => router.replace({ pathname: Routes.LOGIN } as any)}
           >
             <Text className="text-sm font-semibold text-slate-900 dark:text-white">
               {t("RegisterScreen.logIn")}
