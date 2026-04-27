@@ -2,13 +2,11 @@ import { useState } from "react";
 import { View, TextInput, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
-import { useTheme } from "@/context/ThemeContext";
 import { useTranslation } from "react-i18next";
 
 export default function Register() {
   const { t } = useTranslation();
   const { register } = useAuth();
-  const { theme, colorScheme, toggleTheme } = useTheme();
   const router = useRouter();
 
   const [name, setName] = useState("");
