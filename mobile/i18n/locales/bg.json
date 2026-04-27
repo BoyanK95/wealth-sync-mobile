@@ -22,11 +22,15 @@
     "registerButton": "Регистрация"
   },
   "RegisterScreen": {
+    "title": "Създай профил",
+    "description": "Избери име за профила си и влез с защитена парола.",
+    "namePlaceholder": "Име",
     "emailPlaceholder": "Имейл",
     "passwordPlaceholder": "Парола",
     "confirmPasswordPlaceholder": "Потвърдете паролата",
     "registerButton": "Създай акаунт",
     "haveAccount": "Вече имате акаунт? ",
+    "registering": "Създаване на акаунт...",
     "logIn": "Влез"
   }
 }

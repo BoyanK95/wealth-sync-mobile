@@ -3,11 +3,14 @@ import { View, TextInput, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
 import { useTheme } from "@/context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 export default function Register() {
+  const { t } = useTranslation();
   const { register } = useAuth();
   const { theme, colorScheme, toggleTheme } = useTheme();
   const router = useRouter();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,36 +37,16 @@ export default function Register() {
   return (
     <View className="flex-1 bg-slate-50 px-6 py-10 dark:bg-slate-950">
       <View className="mx-auto w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/40 dark:border-slate-700 dark:bg-slate-900 dark:shadow-black/20">
-        <Text className="text-3xl font-bold text-slate-900 dark:text-white">Create account</Text>
-        <Text className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          Pick a profile name and sign in with a secure password.
+        <Text className="text-3xl font-bold text-slate-900 dark:text-white">
+          {t("RegisterScreen.title")}
         </Text>
-
-        <View className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-950">
-          <View className="flex-row items-center justify-between">
-            <View>
-              <Text className="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Theme</Text>
-              <Text className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                {theme === "auto" ? "System" : theme} mode
-              </Text>
-              <Text className="text-xs text-slate-500 dark:text-slate-400">
-                Active: {colorScheme}
-              </Text>
-            </View>
-            <Pressable
-              onPress={toggleTheme}
-              className="rounded-full bg-slate-100 px-4 py-2 dark:bg-slate-800"
-            >
-              <Text className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                Switch
-              </Text>
-            </Pressable>
-          </View>
-        </View>
+        <Text className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+          {t("RegisterScreen.description")}
+        </Text>
 
         <View className="mt-6 space-y-4">
           <TextInput
-            placeholder="Name"
+            placeholder={t("RegisterScreen.namePlaceholder")}
             value={name}
             onChangeText={setName}
             className="h-14 rounded-2xl border border-slate-300 bg-white px-4 text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
@@ -71,7 +54,7 @@ export default function Register() {
             placeholderTextColor="#8b95a1"
           />
           <TextInput
-            placeholder="Email"
+            placeholder={t("RegisterScreen.emailPlaceholder")}
             value={email}
             onChangeText={setEmail}
             className="h-14 rounded-2xl border border-slate-300 bg-white px-4 text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
@@ -80,7 +63,7 @@ export default function Register() {
             placeholderTextColor="#8b95a1"
           />
           <TextInput
-            placeholder="Password"
+            placeholder={t("RegisterScreen.passwordPlaceholder")}
             value={password}
             onChangeText={setPassword}
             secureTextEntry
@@ -96,14 +79,22 @@ export default function Register() {
           style={{ opacity: submitting ? 0.6 : 1 }}
         >
           <Text className="text-base font-semibold text-white dark:text-slate-950">
-            {submitting ? "Creating account..." : "Register"}
+            {submitting
+              ? t("RegisterScreen.registering")
+              : t("RegisterScreen.registerButton")}
           </Text>
         </Pressable>
 
         <View className="mt-5 flex-row justify-center gap-1">
-          <Text className="text-sm text-slate-600 dark:text-slate-400">Already have an account?</Text>
-          <Pressable onPress={() => router.replace({ pathname: "/login" } as any)}>
-            <Text className="text-sm font-semibold text-slate-900 dark:text-white">Login</Text>
+          <Text className="text-sm text-slate-600 dark:text-slate-400">
+            {t("RegisterScreen.haveAccount")}
+          </Text>
+          <Pressable
+            onPress={() => router.replace({ pathname: "/login" } as any)}
+          >
+            <Text className="text-sm font-semibold text-slate-900 dark:text-white">
+              {t("RegisterScreen.logIn")}
+            </Text>
           </Pressable>
         </View>
       </View>

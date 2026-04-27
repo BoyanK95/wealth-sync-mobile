@@ -22,10 +22,14 @@
     "registerButton": "Register"
   },
   "RegisterScreen": {
+    "title": "Create Account",
+    "description": "Pick a profile name and sign in with a secure password.",
+    "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
     "passwordPlaceholder": "Password",
     "confirmPasswordPlaceholder": "Confirm Password",
     "registerButton": "Create Account",
+    "registering": "Creating account...",
     "haveAccount": "Already have an account? ",
     "logIn": "Log In"
   }
