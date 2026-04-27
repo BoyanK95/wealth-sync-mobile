@@ -30,8 +30,6 @@ export default function TabLayout() {
     );
   }
 
-  console.log(user);
-
   return (
     <Tabs
       screenOptions={{
