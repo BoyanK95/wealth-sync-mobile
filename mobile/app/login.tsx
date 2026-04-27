@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { View, TextInput, Button, Text, Pressable, StyleSheet } from "react-native";
+import { View, TextInput, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Login() {
   const { login } = useAuth();
+  const { theme, colorScheme, toggleTheme } = useTheme();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -20,7 +22,7 @@ export default function Login() {
     setSubmitting(true);
     try {
       await login(email, password);
-      router.replace("/"); // goes to (tabs)
+      router.replace({ pathname: "/" } as any);
     } catch {
       alert("Login failed");
     } finally {
@@ -29,58 +31,51 @@ export default function Login() {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        secureTextEntry
-        onChangeText={setPassword}
-        style={styles.input}
-      />
-      <Button
-        title={submitting ? "Logging in..." : "Login"}
-        disabled={submitting}
-        onPress={handleLogin}
-      />
-      <View style={styles.footer}>
-        <Text>Don’t have an account?</Text>
-        <Pressable onPress={() => router.replace({ pathname: "/register" } as any)}>
-          <Text style={styles.link}> Register</Text>
+    <View className="flex-1 bg-slate-50 px-6 py-10 dark:bg-slate-950">
+      <View className="mx-auto w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/40 dark:border-slate-700 dark:bg-slate-900 dark:shadow-black/20">
+        <Text className="text-3xl font-bold text-slate-900 dark:text-white">Welcome back</Text>
+        <Text className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+          Secure login to continue to your dashboard.
+        </Text>
+
+        <View className="mt-6 space-y-4">
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            className="h-14 rounded-2xl border border-slate-300 bg-white px-4 text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            placeholderTextColor="#8b95a1"
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            secureTextEntry
+            onChangeText={setPassword}
+            className="h-14 rounded-2xl border border-slate-300 bg-white px-4 text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+            placeholderTextColor="#8b95a1"
+          />
+        </View>
+
+        <Pressable
+          onPress={handleLogin}
+          disabled={submitting}
+          className="mt-6 rounded-2xl bg-slate-900 px-4 py-4 items-center justify-center disabled:opacity-50 dark:bg-white"
+          style={{ opacity: submitting ? 0.6 : 1 }}
+        >
+          <Text className="text-base font-semibold text-white dark:text-slate-950">
+            {submitting ? "Logging in..." : "Login"}
+          </Text>
         </Pressable>
+
+        <View className="mt-5 flex-row justify-center gap-1">
+          <Text className="text-sm text-slate-600 dark:text-slate-400">Don’t have an account?</Text>
+          <Pressable onPress={() => router.replace({ pathname: "/register" } as any)}>
+            <Text className="text-sm font-semibold text-slate-900 dark:text-white">Register</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    flex: 1,
-    justifyContent: "center",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-  },
-  footer: {
-    marginTop: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  link: {
-    color: "#0f62fe",
-    fontWeight: "700",
-  },
-});

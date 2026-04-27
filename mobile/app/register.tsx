@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { View, TextInput, Button, Text, Pressable, StyleSheet } from "react-native";
+import { View, TextInput, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Register() {
   const { register } = useAuth();
+  const { theme, colorScheme, toggleTheme } = useTheme();
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,7 +23,7 @@ export default function Register() {
     setSubmitting(true);
     try {
       await register(name.trim(), email.trim(), password);
-      router.replace("/");
+      router.replace({ pathname: "/" } as any);
     } catch {
       alert("Registration failed. Please try again.");
     } finally {
@@ -30,71 +32,81 @@ export default function Register() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Create an account</Text>
-      <TextInput
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
-        style={styles.input}
-        autoCapitalize="words"
-      />
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        style={styles.input}
-        secureTextEntry
-      />
-      <Button
-        title={submitting ? "Creating account..." : "Register"}
-        onPress={handleRegister}
-        disabled={submitting}
-      />
-      <View style={styles.footer}>
-        <Text>Already have an account?</Text>
-        <Pressable onPress={() => router.replace({ pathname: "/login" } as any)}>
-          <Text style={styles.link}> Login</Text>
+    <View className="flex-1 bg-slate-50 px-6 py-10 dark:bg-slate-950">
+      <View className="mx-auto w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/40 dark:border-slate-700 dark:bg-slate-900 dark:shadow-black/20">
+        <Text className="text-3xl font-bold text-slate-900 dark:text-white">Create account</Text>
+        <Text className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+          Pick a profile name and sign in with a secure password.
+        </Text>
+
+        <View className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-950">
+          <View className="flex-row items-center justify-between">
+            <View>
+              <Text className="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Theme</Text>
+              <Text className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                {theme === "auto" ? "System" : theme} mode
+              </Text>
+              <Text className="text-xs text-slate-500 dark:text-slate-400">
+                Active: {colorScheme}
+              </Text>
+            </View>
+            <Pressable
+              onPress={toggleTheme}
+              className="rounded-full bg-slate-100 px-4 py-2 dark:bg-slate-800"
+            >
+              <Text className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                Switch
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+
+        <View className="mt-6 space-y-4">
+          <TextInput
+            placeholder="Name"
+            value={name}
+            onChangeText={setName}
+            className="h-14 rounded-2xl border border-slate-300 bg-white px-4 text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+            autoCapitalize="words"
+            placeholderTextColor="#8b95a1"
+          />
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            className="h-14 rounded-2xl border border-slate-300 bg-white px-4 text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            placeholderTextColor="#8b95a1"
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            className="h-14 rounded-2xl border border-slate-300 bg-white px-4 text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+            placeholderTextColor="#8b95a1"
+          />
+        </View>
+
+        <Pressable
+          onPress={handleRegister}
+          disabled={submitting}
+          className="mt-6 rounded-2xl bg-slate-900 px-4 py-4 items-center justify-center disabled:opacity-50 dark:bg-white"
+          style={{ opacity: submitting ? 0.6 : 1 }}
+        >
+          <Text className="text-base font-semibold text-white dark:text-slate-950">
+            {submitting ? "Creating account..." : "Register"}
+          </Text>
         </Pressable>
+
+        <View className="mt-5 flex-row justify-center gap-1">
+          <Text className="text-sm text-slate-600 dark:text-slate-400">Already have an account?</Text>
+          <Pressable onPress={() => router.replace({ pathname: "/login" } as any)}>
+            <Text className="text-sm font-semibold text-slate-900 dark:text-white">Login</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    flex: 1,
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "700",
-    marginBottom: 24,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-  },
-  footer: {
-    marginTop: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  link: {
-    color: "#0f62fe",
-    fontWeight: "700",
-  },
-});
