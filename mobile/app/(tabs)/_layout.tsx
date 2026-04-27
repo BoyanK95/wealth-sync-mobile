@@ -1,4 +1,5 @@
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
+import { useEffect } from "react";
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
@@ -8,12 +9,20 @@ import { ThemedText } from "@/components/themed-text";
 import { useAuth } from "@/hooks/use-auth";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
 import { tabs } from "@/constants/tabs";
+import { Routes } from "@/constants/routes";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const router = useRouter();
   const { user, loading } = useAuth();
 
-  if (loading) {
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace(Routes.LOGIN);
+    }
+  }, [loading, user, router]);
+
+  if (loading || !user) {
     return (
       <ThemedView>
         <ThemedText>Loading...</ThemedText>
@@ -21,9 +30,6 @@ export default function TabLayout() {
     );
   }
 
-  // if (!user) {
-  //   return <Redirect href="/login" />;
-  // }
   console.log(user);
 
   return (

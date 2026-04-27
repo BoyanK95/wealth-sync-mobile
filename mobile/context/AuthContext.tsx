@@ -16,6 +16,7 @@ type User = {
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   loading: boolean;
 }
@@ -51,6 +52,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser({
       token,
       email: data.email,
+      name: data.name,
+    });
+  };
+
+  const register = async (name: string, email: string, password: string) => {
+    const data = await authService.register(name, email, password);
+    const token = await authService.getAccessToken();
+
+    if (!token) {
+      throw new Error("Missing access token after registration");
+    }
+
+    setUser({
+      token,
+      email: data.email,
+      name: data.name,
     });
   };
 
@@ -63,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

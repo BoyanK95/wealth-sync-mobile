@@ -3,26 +3,27 @@ import { View, TextInput, Button, Text, Pressable, StyleSheet } from "react-nati
 import { useRouter } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
 
-export default function Login() {
-  const { login } = useAuth();
+export default function Register() {
+  const { register } = useAuth();
   const router = useRouter();
-
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     if (submitting) return;
-    if (!email.trim() || !password.trim()) {
+    if (!name.trim() || !email.trim() || !password.trim()) {
       alert("Please fill in all fields");
       return;
     }
+
     setSubmitting(true);
     try {
-      await login(email, password);
-      router.replace("/"); // goes to (tabs)
+      await register(name.trim(), email.trim(), password);
+      router.replace("/");
     } catch {
-      alert("Login failed");
+      alert("Registration failed. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -30,6 +31,14 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Create an account</Text>
+      <TextInput
+        placeholder="Name"
+        value={name}
+        onChangeText={setName}
+        style={styles.input}
+        autoCapitalize="words"
+      />
       <TextInput
         placeholder="Email"
         value={email}
@@ -41,19 +50,19 @@ export default function Login() {
       <TextInput
         placeholder="Password"
         value={password}
-        secureTextEntry
         onChangeText={setPassword}
         style={styles.input}
+        secureTextEntry
       />
       <Button
-        title={submitting ? "Logging in..." : "Login"}
+        title={submitting ? "Creating account..." : "Register"}
+        onPress={handleRegister}
         disabled={submitting}
-        onPress={handleLogin}
       />
       <View style={styles.footer}>
-        <Text>Don’t have an account?</Text>
-        <Pressable onPress={() => router.replace({ pathname: "/register" } as any)}>
-          <Text style={styles.link}> Register</Text>
+        <Text>Already have an account?</Text>
+        <Pressable onPress={() => router.replace({ pathname: "/login" } as any)}>
+          <Text style={styles.link}> Login</Text>
         </Pressable>
       </View>
     </View>
@@ -65,6 +74,11 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     justifyContent: "center",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "700",
+    marginBottom: 24,
   },
   input: {
     borderWidth: 1,

@@ -32,6 +32,31 @@ export const authService = {
     return data.user;
   },
 
+  async register(name: string, email: string, password: string) {
+    const res = await fetch(`${API_URL}/api/auth/mobile-register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Registration failed");
+    }
+
+    const data = await res.json();
+
+    if (!data.accessToken || !data.refreshToken) {
+      throw new Error("Invalid registration response");
+    }
+
+    await SecureStore.setItemAsync("accessToken", data.accessToken);
+    await SecureStore.setItemAsync("refreshToken", data.refreshToken);
+
+    return data.user;
+  },
+
   async logout() {
     await SecureStore.deleteItemAsync("accessToken");
     await SecureStore.deleteItemAsync("refreshToken");
