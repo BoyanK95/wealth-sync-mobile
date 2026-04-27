@@ -9,7 +9,13 @@ const ThemeToggle = () => {
   const { toggleTheme } = useTheme();
 
   return (
-    <TouchableOpacity onPress={toggleTheme} style={{ marginRight: 16 }}>
+    <TouchableOpacity
+      onPress={toggleTheme}
+      style={{ marginRight: 16 }}
+      accessibilityLabel={`Switch to ${colorScheme === "dark" ? "light" : "dark"} mode`}
+      accessibilityHint="Toggles between light and dark mode"
+      accessibilityRole="button"
+    >
       <MaterialIcons
         name={colorScheme === "dark" ? "wb-sunny" : "brightness-2"}
         size={24}
