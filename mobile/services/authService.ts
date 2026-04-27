@@ -3,9 +3,7 @@ import * as SecureStore from "expo-secure-store";
 const API_URL = process.env.EXPO_PUBLIC_API_URL!;
 
 if (!API_URL) {
-  throw new Error(
-    "Missing EXPO_PUBLIC_API_URL in your environment variables.",
-  );
+  throw new Error("Missing EXPO_PUBLIC_API_URL in your environment variables.");
 }
 
 export const authService = {
@@ -22,7 +20,7 @@ export const authService = {
 
     const data = await res.json();
 
-    if (!data.accessToken || !data.refreshToken) {
+    if (!data.accessToken || !data.refreshToken || !data.user) {
       throw new Error("Invalid login response");
     }
 
