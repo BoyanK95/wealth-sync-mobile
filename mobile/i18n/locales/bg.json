@@ -10,5 +10,31 @@
       "realtime": "Обновяване в реално време",
       "mobile": "Мобилно приложение"
     }
+  },
+  "LoginScreen": {
+    "title": "Добре дошъл обратно",
+    "loginCTA": "Влез в своя акаунт",
+    "emailPlaceholder": "Имейл",
+    "passwordPlaceholder": "Парола",
+    "loginButton": "Влез",
+    "loggingIn": "Влизане...",
+    "noAccount": "Нямаш акаунт? ",
+    "registerButton": "Регистрация",
+    "fillAllFields": "Моля, попълнете всички полета!",
+    "loginFailed": "Влизането не беше успешно. Моля, опитайте отново!"
+  },
+  "RegisterScreen": {
+    "title": "Създай профил",
+    "description": "Избери име за профила си и влез с защитена парола.",
+    "namePlaceholder": "Име",
+    "emailPlaceholder": "Имейл",
+    "passwordPlaceholder": "Парола",
+    "confirmPasswordPlaceholder": "Потвърдете паролата",
+    "registerButton": "Създай акаунт",
+    "haveAccount": "Вече имате акаунт? ",
+    "registering": "Създаване на акаунт...",
+    "logIn": "Влез",
+    "fillAllFields": "Моля, попълнете всички полета.",
+    "registrationFailed": "Регистрацията не беше успешна. Моля, опитайте отново."
   }
 }

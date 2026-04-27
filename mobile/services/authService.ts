@@ -3,9 +3,7 @@ import * as SecureStore from "expo-secure-store";
 const API_URL = process.env.EXPO_PUBLIC_API_URL!;
 
 if (!API_URL) {
-  throw new Error(
-    "Missing EXPO_PUBLIC_API_URL in your environment variables.",
-  );
+  throw new Error("Missing EXPO_PUBLIC_API_URL in your environment variables.");
 }
 
 export const authService = {
@@ -22,8 +20,44 @@ export const authService = {
 
     const data = await res.json();
 
-    if (!data.accessToken || !data.refreshToken) {
+    if (!data.accessToken || !data.refreshToken || !data.user) {
       throw new Error("Invalid login response");
+    }
+
+    await SecureStore.setItemAsync("accessToken", data.accessToken);
+    await SecureStore.setItemAsync("refreshToken", data.refreshToken);
+
+    return data.user;
+  },
+
+  async register(name: string, email: string, password: string) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    let res: Response;
+    try {
+      res = await fetch(`${API_URL}/api/auth/mobile-register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+        signal: controller.signal,
+      });
+    } catch (error) {
+      throw new Error("Registration failed", {
+        cause: error instanceof Error ? error : undefined,
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
+    if (!res.ok) {
+      throw new Error("Registration failed");
+    }
+
+    const data = await res.json();
+
+    if (!data.accessToken || !data.refreshToken) {
+      throw new Error("Invalid registration response");
     }
 
     await SecureStore.setItemAsync("accessToken", data.accessToken);

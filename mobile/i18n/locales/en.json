@@ -10,5 +10,31 @@
       "realtime": "Real-time Updates",
       "mobile": "Mobile App"
     }
+  },
+  "LoginScreen": {
+    "title": "Welcome back",
+    "loginCTA": "Log In to Your Account",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Log In",
+    "loggingIn": "Logging in...",
+    "noAccount": "Don’t have an account? ",
+    "registerButton": "Register",
+    "fillAllFields": "Please fill in all fields!",
+    "loginFailed": "Login failed!"
+  },
+  "RegisterScreen": {
+    "title": "Create Account",
+    "description": "Pick a profile name and sign in with a secure password.",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "registerButton": "Create Account",
+    "registering": "Creating account...",
+    "haveAccount": "Already have an account? ",
+    "logIn": "Log In",
+    "fillAllFields": "Please fill in all fields.",
+    "registrationFailed": "Registration failed. Please try again."
   }
 }
