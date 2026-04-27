@@ -31,14 +31,25 @@ export const authService = {
   },
 
   async register(name: string, email: string, password: string) {
-    const res = await fetch(`${API_URL}/api/auth/mobile-register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password }),
-    });
-
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    let res: Response;
+    try {
+      res = await fetch(`${API_URL}/api/auth/mobile-register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+        signal: controller.signal,
+      });
+    } catch (error) {
+      throw new Error("Registration failed", {
+        cause: error instanceof Error ? error : undefined,
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
     if (!res.ok) {
       throw new Error("Registration failed");
     }
