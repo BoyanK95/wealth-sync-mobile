@@ -10,7 +10,7 @@ import { authService } from "../services/authService";
 type User = {
   name?: string | null;
   token: string;
-  email?: string;
+  email?: string | null;
 };
 
 interface AuthContextType {
