@@ -13,11 +13,9 @@ export default function IntroductionSection() {
 
   return (
     <View className="w-full px-4 py-10 bg-white dark:bg-gray-900">
-      {/* Welcome */}
       {user && (
         <Text className="mb-4 text-base text-black dark:text-white">
-          {t("IntroductionSection.welcomeBack")} [user.email ?
-          <Text className="font-bold text-green-700 dark:text-green-400">{user.email}</Text> : null]
+          {t("IntroductionSection.welcomeBack")}!
         </Text>
       )}
       {/* Image */}
