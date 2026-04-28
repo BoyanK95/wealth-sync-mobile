@@ -8,6 +8,7 @@ import { ThemedView } from "@/components/themed-view";
 import { ThemedText } from "@/components/themed-text";
 import { useAuth } from "@/hooks/use-auth";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
+import UserMenu from "@/components/UserMenu/UserMenu";
 import { tabs } from "@/constants/tabs";
 import { Routes } from "@/constants/routes";
 
@@ -39,7 +40,12 @@ export default function TabLayout() {
         headerStyle: {
           backgroundColor: Colors[colorScheme ?? "light"].background,
         },
-        headerRight: () => <ThemeToggle />,
+        headerRight: () => (
+          <>
+            <ThemeToggle />
+            <UserMenu style={{ marginLeft: 16 }} />
+          </>
+        ),
         tabBarButton: HapticTab,
         tabBarStyle: {
           backgroundColor: Colors[colorScheme ?? "light"].background,
